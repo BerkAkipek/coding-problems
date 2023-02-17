@@ -21,5 +21,22 @@ def denseRanking(ranked):
             leaderBoard.append(position)
     return leaderBoard
 
+
+# Solution 
+
+def climbingLeaderboard(ranked, player):
+    # Write your code here
+    unique_rank = sorted(list(set(ranked)), reverse=True)
+
+    rank_result = []
+    for score in player:
+        while len(unique_rank) > 0 and score >= unique_rank[-1]:
+            unique_rank.pop()
+
+        rank_result.append(len(unique_rank) + 1)
+    
+    return rank_result
+
+
 if __name__ == '__main__':
     print(denseRanking([100, 100, 50, 40, 40, 20, 10]))
