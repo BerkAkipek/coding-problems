@@ -30,13 +30,10 @@ def saveThePrisoner(n, m, s):
     
 # But this is computationally expensive we just simply calculate prisoner without a loop. 
 
+
 def saveThePrisoner(n, m, s):
-    result = s
-    for i in range(1, m):
-        result = (result + 1) % n
-    if result == 0:
+    prisonerToWarn = (m + s - 1) % n
+    if prisonerToWarn == 0:
         return n
     else:
-        return result
-
-
+        return prisonerToWarn 
