@@ -27,6 +27,3 @@ def findDigits(n):
         temp //= 10
     return result
 
-print(findDigits(124))
-print(findDigits(111))
-print(findDigits(10))
