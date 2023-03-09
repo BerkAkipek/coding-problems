@@ -1,57 +1,54 @@
-# Jumping On The Clouds
+#!/usr/bin/python3
 
-# A child is playing a cloud hopping game.
-# In this game, there are sequentially numbered clouds that can be thunderheads or cumulus clouds.
-# The character must jump from cloud to cloud until it reaches the start again.
+# Jumping On The Clouds Hackerrank 
 
-# There is an array of clouds, c and an energy level e = 100.
-# The character starts from c[0] and uses 1 unit of energy to make a jump of size k to cloud c[(i + k) % n].
-# If it lands on a thundercloud, c[i] = 1, its energy (e) decreases by 2 additional units. 
-# The game ends when the character lands back on cloud 0.
-# Given the values of n, k, and the configuration of the clouds as an array c, determine the final value of e after the game ends.
+# There is a new mobile game that starts with consecutively numbered clouds.
+# Some of the clouds are thunderheads and others are cumulus.
+# The player can jump on any cumulus cloud having a number that is equal to the number of the current cloud plus 1 or 2.
+# The player must avoid the thunderheads.
+# Determine the minimum number of jumps it will take to jump from the starting postion to the last cloud.
+# It is always possible to win the game.
 
-# Example 
-# c = [0, 0, 1, 0]
-# k = 2
-# The indices of the path are 0 -> 2 -> 0. The energy level reduces by 1 for each jump to 98.
-# The character landed on one thunderhead at an additional cost of 2 energy units.
-# The final energy level is 96.
-# Note: Recall that % refers to the modulo operation. In this case, it serves to make the route circular.
-# If the character is at c[n-1] and jumps 1, it will arrive at c[0].
+# For each game, you will get an array of clouds numbered 0 if they are safe or 1 if they must be avoided.
 
-c = [0, 0, 1, 0, 0, 1, 1, 0]
-k = 2
+# Example
+# c = [0, 1, 0, 0, 0, 1, 0]
+# There is only possible 2 ways. 
+# Because i can't jump clouds 1 and 5 indexed.  
+# 0 -> 2 -> 4 -> 6 | 0 -> 2 -> 3 -> 4 -> 6 
 
-def jumpingOnClouds(c, k):
-    e = 100
-    n = int(len(c) / k)
-    for i in range(n):
-        if c[(i+k) % n] == 1:
-            e -= 3
+# Pseudocode 
+# Start jumping with a length of two 
+# if you land a thunder cloud reduce index by 1
+# Count if jump was valid
+
+def jumpingOnClouds(c):
+    count = 0
+    for i in range(0, len(c), 2):
+        if c[i] == 1:
+            i -= 3
+            continue
         else:
-            e -= 1
-    return e
+            print(i, end=' ')
+            count += 1
+    return count
 
-print(jumpingOnClouds(c, k))
+# This approach is so wrong we are starting counting from first cloud. 
+# Even expected values wrong. 
 
-# My first attemp above failed it returned 94 but expected 92. 
+def jumpingOnClouds(c):
+    result = 0
+    i = 0
+    while i < len(c) - 1:
+        if (i + 2) < len(c) and c[i + 2] == 0:
+            i += 2
+            result += 1
+        else:
+            i += 1
+            result += 1
+    return result
 
-def jumpingOnClouds(c, k):
-    energy = 100
-    index = counter = 0
-    n = len(c)
-    while counter == 0 or index != 0:
-        index = (index + k) % n 
-        if c[index] == 1:
-            energy -=2
-        energy -= 1
-        counter +=1
-    return energy
 
-print(jumpingOnClouds(c, k))
-
-c = [1, 1, 1, 0, 1, 1, 0, 0, 0, 0]
-k = 3
-
-print(jumpingOnClouds(c, k))
-
+if __name__ == '__main__':
+    print(jumpingOnClouds([0, 0, 0, 1, 0, 0])) # Expected: 3
+    print(jumpingOnClouds([0, 0, 1, 0, 0, 1, 0])) # Expected 4
