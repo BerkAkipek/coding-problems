@@ -29,12 +29,10 @@ def jumpingOnClouds(c):
             i -= 3
             continue
         else:
-            print(i, end=' ')
             count += 1
     return count
 
-# This approach is so wrong we are starting counting from first cloud. 
-# Even expected values wrong. 
+# This approach is wrong we are starting counting from first cloud. 
 
 def jumpingOnClouds(c):
     result = 0
