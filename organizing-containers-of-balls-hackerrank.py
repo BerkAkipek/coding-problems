@@ -23,16 +23,15 @@ container02 = [[1, 3, 1], [2, 1, 2], [3, 3, 3]]
 
 
 def organizingContainers(container):
-    res, tot = 0, []
-    for i in range(len(container[0])):
-        for elem in container:
-            res += elem[i]
-        tot.append(res)
-        res = 0
-    if sum(tot) % 2 == 1:
-        return "Impossible"
-    else:
-        return "Possible"
+    ball_counts = [0] * len(container) # [0 0], [0 0 0]
+    poss = "Possible"
+    for i in range(len(container)):
+        ball_counts[i] += sum([container[j][i] for j in range(len(container))]) # Elementwise sum of lists
+    for i in range(len(container)):
+        if sum(container[i]) not in ball_counts:
+            poss = "Impossible"
+            break
+    return poss
 
 
 print(organizingContainers(container=container01))
