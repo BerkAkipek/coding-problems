@@ -34,4 +34,4 @@ def howManyGames(p, d, m, s):
 print(howManyGames(20, 3, 6, 70))
 print(howManyGames(16, 2, 1, 9981)) # -> 9917
 print(howManyGames(99, 3, 1, 5555))
-print(howManyGames(13, 86, 8, 9027)) # -> 1127
+print(howManyGames(13, 86, 8, 9027)) # -> 1127 
